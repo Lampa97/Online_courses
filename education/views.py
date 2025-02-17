@@ -1,8 +1,9 @@
-from .models import Course, Lesson
 from django.shortcuts import get_object_or_404
-from .serializers import CourseSerializer, LessonSerializer
-from rest_framework import viewsets, generics
+from rest_framework import generics, viewsets
 from rest_framework.response import Response
+
+from .models import Course, Lesson
+from .serializers import CourseSerializer, LessonSerializer
 
 
 class CourseViewSet(viewsets.ViewSet):
@@ -11,7 +12,6 @@ class CourseViewSet(viewsets.ViewSet):
         queryset = Course.objects.all()
         serializer = CourseSerializer(queryset, many=True)
         return Response(serializer.data)
-
 
     def retrieve(self, request, pk=None):
         queryset = Course.objects.all()
@@ -52,17 +52,21 @@ class LessonList(generics.ListAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
 
+
 class LessonCreate(generics.CreateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
+
 
 class LessonDetail(generics.RetrieveAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
 
+
 class LessonUpdate(generics.UpdateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
+
 
 class LessonDelete(generics.DestroyAPIView):
     queryset = Lesson.objects.all()

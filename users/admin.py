@@ -5,6 +5,8 @@ from .models import User
 
 @admin.register(User)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("id", "email",)
+    list_display = (
+        "id",
+        "email",
+    )
     search_fields = ("email",)
-
