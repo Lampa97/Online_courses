@@ -19,7 +19,7 @@ class Lesson(models.Model):
     title = models.CharField(max_length=150, verbose_name="Title")
     description = models.TextField(verbose_name="Description")
     preview = models.ImageField(upload_to="lessons/", default="lessons/default_lesson.png", verbose_name="Preview")
-    video_link = models.URLField(verbose_name="Video link")
+    video_link = models.URLField(verbose_name="Video link", blank=True, null=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lessons", verbose_name="Course")
 
     class Meta:
