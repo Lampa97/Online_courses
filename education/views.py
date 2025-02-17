@@ -48,7 +48,11 @@ class CourseViewSet(viewsets.ViewSet):
         return Response({"message": "Course deleted successfully"})
 
 
-class LessonList(generics.ListCreateAPIView):
+class LessonList(generics.ListAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+
+class LessonCreate(generics.CreateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
 
