@@ -1,7 +1,7 @@
 from .models import Course, Lesson
 from django.shortcuts import get_object_or_404
 from .serializers import CourseSerializer, LessonSerializer
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from rest_framework.response import Response
 
 
@@ -27,6 +27,14 @@ class CourseViewSet(viewsets.ViewSet):
         serializer.save()
         return Response(serializer.data)
 
+    def partial_update(self, request, pk=None):
+        queryset = Course.objects.all()
+        course = get_object_or_404(queryset, pk=pk)
+        serializer = CourseSerializer(course, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
     def create(self, request):
         serializer = CourseSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -38,3 +46,20 @@ class CourseViewSet(viewsets.ViewSet):
         course = get_object_or_404(queryset, pk=pk)
         course.delete()
         return Response({"message": "Course deleted successfully"})
+
+
+class LessonList(generics.ListCreateAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+
+class LessonDetail(generics.RetrieveAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+
+class LessonUpdate(generics.UpdateAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+
+class LessonDelete(generics.DestroyAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
