@@ -1,11 +1,11 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, generics
-from rest_framework.response import Response
-from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics, viewsets
+from rest_framework.filters import OrderingFilter
+from rest_framework.response import Response
 
-from .models import User, Payment
-from .serializers import UserSerializer, PaymentSerializer
+from .models import Payment, User
+from .serializers import PaymentSerializer, UserSerializer
 
 
 class UserViewSet(viewsets.ViewSet):
