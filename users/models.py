@@ -30,7 +30,7 @@ class Payment(models.Model):
 
     PAYMENT_METHOD_CHOICES = [
         ("Cash", "Cash"),
-        ("Bank Transfer", "Bank Transfer"),
+        ("Transfer", "Transfer"),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="payments", verbose_name="Payment")

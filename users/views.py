@@ -1,9 +1,11 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from rest_framework.response import Response
+from rest_framework.filters import SearchFilter, OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
-from .models import User
-from .serializers import UserSerializer
+from .models import User, Payment
+from .serializers import UserSerializer, PaymentSerializer
 
 
 class UserViewSet(viewsets.ViewSet):
@@ -40,3 +42,11 @@ class UserViewSet(viewsets.ViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+
+
+class PaymentListAPIView(generics.ListCreateAPIView):
+    queryset = Payment.objects.all()
+    serializer_class = PaymentSerializer
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    filterset_fields = ["payment_method", "paid_course", "paid_lesson"]
+    ordering_fields = ["payment_date"]

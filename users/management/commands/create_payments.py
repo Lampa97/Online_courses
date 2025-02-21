@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from users.models import Payment, User
 from education.models import Course, Lesson
 import random
+from time import sleep
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -20,5 +21,6 @@ class Command(BaseCommand):
 
         for user in test_users:
             Payment.objects.get_or_create(user=user, amount=random.randint(100, 200), payment_method="Cash", paid_lesson=random.choice(random.choice(lessons_list)))
-            Payment.objects.get_or_create(user=user, amount=random.randint(1000, 2000), payment_method="Bank Transfer", paid_course=random.choice(courses_list))
+            Payment.objects.get_or_create(user=user, amount=random.randint(1000, 2000), payment_method="Transfer", paid_course=random.choice(courses_list))
+            sleep(0.3)
         self.stdout.write(self.style.SUCCESS("Successfully created payments for test users"))
