@@ -3,6 +3,7 @@ from rest_framework import generics
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
+
 from .models import Payment, User
 from .serializers import PaymentSerializer, UserSerializer, UserTokenObtainPairSerializer
 
@@ -12,7 +13,7 @@ class UserListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = UserSerializer
 
     def get_permissions(self):
-        if self.request.method == 'POST':
+        if self.request.method == "POST":
             self.permission_classes = [AllowAny]
         return super().get_permissions()
 
@@ -26,7 +27,6 @@ class UserListCreateAPIView(generics.ListCreateAPIView):
 class UserRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
 
 
 class PaymentListAPIView(generics.ListCreateAPIView):
