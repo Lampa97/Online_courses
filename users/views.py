@@ -3,9 +3,10 @@ from rest_framework import generics
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .permissions import IsOwner, IsAdmin
+
 from .models import Payment, User
-from .serializers import PaymentSerializer, OtherUserSerializer, UserSerializer, UserTokenObtainPairSerializer
+from .permissions import IsAdmin, IsOwner
+from .serializers import OtherUserSerializer, PaymentSerializer, UserSerializer, UserTokenObtainPairSerializer
 
 
 class UserListAPIView(generics.ListAPIView):
@@ -33,6 +34,7 @@ class UserUpdateAPIView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsOwner,)
+
 
 class UserDestroyAPIView(generics.DestroyAPIView):
     queryset = User.objects.all()

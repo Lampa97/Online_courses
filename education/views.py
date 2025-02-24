@@ -36,15 +36,6 @@ class CourseViewSet(viewsets.ViewSet):
         serializer = CourseSerializer(course)
         return Response(serializer.data)
 
-    def retrieve(self, request, pk=None):
-        course = get_object_or_404(Course, pk=pk)
-        if not (IsOwner().has_object_permission(request, self, course) or IsModerator().has_permission(request, self)):
-            return Response(
-                {"detail": "You do not have permission to perform this action."}, status=status.HTTP_403_FORBIDDEN
-            )
-        serializer = CourseSerializer(course)
-        return Response(serializer.data)
-
     def partial_update(self, request, pk=None):
         course = get_object_or_404(Course, pk=pk)
         if not (IsOwner().has_object_permission(request, self, course) or IsModerator().has_permission(request, self)):
