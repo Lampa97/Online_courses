@@ -3,12 +3,17 @@ from rest_framework import generics
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+from .permissions import IsOwner, IsAdmin
 from .models import Payment, User
-from .serializers import PaymentSerializer, UserSerializer, UserTokenObtainPairSerializer
+from .serializers import PaymentSerializer, OtherUserSerializer, UserSerializer, UserTokenObtainPairSerializer
 
 
-class UserListCreateAPIView(generics.ListCreateAPIView):
+class UserListAPIView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = OtherUserSerializer
+
+
+class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -24,9 +29,24 @@ class UserListCreateAPIView(generics.ListCreateAPIView):
         user.save()
 
 
-class UserRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+class UserUpdateAPIView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (IsOwner,)
+
+class UserDestroyAPIView(generics.DestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAdmin,)
+
+
+class UserRetrieveAPIView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+
+    def get_serializer_class(self):
+        if self.get_object() == self.request.user:
+            return UserSerializer
+        return OtherUserSerializer
 
 
 class PaymentListAPIView(generics.ListCreateAPIView):
