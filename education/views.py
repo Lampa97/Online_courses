@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, viewsets
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsModerator
 
 from .models import Course, Lesson
 from .serializers import CourseSerializer, LessonSerializer
@@ -47,16 +49,21 @@ class CourseViewSet(viewsets.ViewSet):
         course.delete()
         return Response({"message": "Course deleted successfully"})
 
+    def get_permissions(self):
+        if self.action in ["create", "destroy"]:
+            self.permission_classes = [~IsModerator & IsAuthenticated]
+        return super().get_permissions()
 
 class LessonList(generics.ListAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
 
 
+
 class LessonCreate(generics.CreateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
-
+    permission_classes = [~IsModerator & IsAuthenticated]
 
 class LessonDetail(generics.RetrieveAPIView):
     queryset = Lesson.objects.all()
@@ -71,3 +78,4 @@ class LessonUpdate(generics.UpdateAPIView):
 class LessonDelete(generics.DestroyAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
+    permission_classes = [~IsModerator]
