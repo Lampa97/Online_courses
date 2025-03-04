@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import User, Payment, Subscription
+from .models import Payment, Subscription, User
 
 
 @admin.register(User)
@@ -10,6 +10,7 @@ class UserAdmin(admin.ModelAdmin):
         "email",
     )
     search_fields = ("email",)
+
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):

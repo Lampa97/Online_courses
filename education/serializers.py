@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
 from users.models import Subscription
+
 from .models import Course, Lesson
-from users.serializers import SubscriptionSerializer
 
 
 class LessonSerializer(serializers.ModelSerializer):

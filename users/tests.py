@@ -1,18 +1,18 @@
-from rest_framework.test import APITestCase
-from users.models import User
-from education.models import Course, Lesson
-from .models import Subscription
 from django.urls import reverse
 from rest_framework import status
-from rest_framework import serializers
+from rest_framework.test import APITestCase
+
+from education.models import Course
+from users.models import User
+
+from .models import Subscription
 
 
 class SubscriptionTestCase(APITestCase):
 
     def setUp(self):
-        self.user = User.objects.create(email='test_user@.com')
-        self.course = Course.objects.create(title='Python', description='Python course', owner=self.user)
-
+        self.user = User.objects.create(email="test_user@.com")
+        self.course = Course.objects.create(title="Python", description="Python course", owner=self.user)
 
     def test_subscription(self):
         url = reverse("users:subscription")

@@ -1,6 +1,8 @@
 from django.db import models
-from .validators import validate_video_link
+
 from config.settings import AUTH_USER_MODEL as User
+
+from .validators import validate_video_link
 
 
 class Course(models.Model):

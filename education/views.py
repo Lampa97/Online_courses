@@ -4,9 +4,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .models import Course, Lesson
+from .paginators import CustomPagination
 from .permissions import IsModerator, IsOwner
 from .serializers import CourseSerializer, LessonSerializer
-from .paginators import CustomPagination
+
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
@@ -15,9 +16,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
-        context.update({
-            "request": self.request
-        })
+        context.update({"request": self.request})
         return context
 
     def get_permissions(self):

@@ -5,10 +5,13 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
+
 from education.models import Course
-from .models import Payment, User, Subscription
+
+from .models import Payment, Subscription, User
 from .permissions import IsAdmin, IsOwner
-from .serializers import OtherUserSerializer, PaymentSerializer, UserSerializer, UserTokenObtainPairSerializer, SubscriptionSerializer
+from .serializers import (OtherUserSerializer, PaymentSerializer, SubscriptionSerializer, UserSerializer,
+                          UserTokenObtainPairSerializer)
 
 
 class UserListAPIView(generics.ListAPIView):
@@ -79,9 +82,8 @@ class SubscriptionAPIView(views.APIView):
 
         if subs_item.exists():
             subs_item.delete()
-            message = 'Deleted subscription'
+            message = "Deleted subscription"
         else:
             Subscription.objects.create(user=user, course=course_item)
-            message = 'Added subscription'
+            message = "Added subscription"
         return Response({"message": message})
-

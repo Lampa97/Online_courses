@@ -10,6 +10,10 @@ This project is a Django API designed to manage online courses, lessons, and pay
 - **Lesson Management**: Create and manage lessons associated with courses.
 - **User Management**: Create test users for testing purposes.
 - **Payment Management**: Generate and manage payments for users.
+- **Pagination for course listings**
+- **Group-based permissions for moderators**
+- **Subscription management**
+
 
 ## Setup
 
@@ -40,3 +44,47 @@ To set up the project, follow these steps:
 3. Run the `create_payments` command to generate payments for the test users.
 
 By following these steps, you will have a fully set up environment with courses, lessons, test users, and associated payments.
+
+## API Endpoints
+
+### User Endpoints
+
+- `POST /register/` - Register a new user
+- `POST /login/` - Obtain a JWT token
+- `POST /token/refresh/` - Refresh JWT token
+- `GET /users/` - List all users
+- `GET /users/<int:pk>/` - Retrieve a user
+- `PUT /users/<int:pk>/update/` - Update a user
+- `DELETE /users/<int:pk>/delete/` - Delete a user
+
+### Course Endpoints
+
+- `GET /courses/` - List all courses (paginated)
+- `POST /courses/` - Create a new course
+- `GET /courses/<int:pk>/` - Retrieve a course
+- `PUT /courses/<int:pk>/` - Update a course
+- `DELETE /courses/<int:pk>/` - Delete a course
+
+### Lesson Endpoints
+
+- `GET /lessons/` - List all lessons
+- `POST /lessons/` - Create a new lesson
+- `GET /lessons/<int:pk>/` - Retrieve a lesson
+- `PUT /lessons/<int:pk>/` - Update a lesson
+- `DELETE /lessons/<int:pk>/` - Delete a lesson
+
+
+- ### Subscription Endpoints
+
+- `POST /subscription/` - Subscribe or unsubscribe to a course
+
+### Payment Endpoints
+
+- `GET /payments/` - List all payments
+- `POST /payments/` - Create a new payment
+
+## Running Tests
+
+To run the tests, use the following command:
+```sh
+python manage.py test
