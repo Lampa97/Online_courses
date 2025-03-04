@@ -8,7 +8,16 @@ from .permissions import IsModerator, IsOwner
 from .serializers import CourseSerializer, LessonSerializer
 
 
-class CourseViewSet(viewsets.ViewSet):
+class CourseViewSet(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({
+            "request": self.request
+        })
+        return context
 
     def get_permissions(self):
         if self.action == "create":
