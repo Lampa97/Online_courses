@@ -1,0 +1,36 @@
+[run]
+source = '.'
+omit =
+    *tests*
+    *apps.py
+    *manage.py
+    *__init__.py
+    *migrations*
+    *asgi*
+    *wsgi*
+    *admin.py
+    *urls.py
+    */settings/*
+    *create_courses_and_lessons.py*
+        *create_payments.py*
+    *create_test_users.py*
+
+[report]
+omit =
+    *tests*
+    *apps.py
+    *manage.py
+    *__init__.py
+    *migrations*
+    *asgi*
+    *wsgi*
+    *admin.py
+    *urls.py
+    */settings/*
+    *create_courses_and_lessons.py*
+    *create_payments.py*
+    *create_test_users.py*
+
+fail_under = 80
+show_missing = True
+skip_covered = True
