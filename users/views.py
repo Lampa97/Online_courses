@@ -5,7 +5,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .services import create_stripe_price, create_stripe_session, create_stripe_product, check_session_status
+
 from education.models import Course
 
 from .models import Payment, Subscription, User
@@ -50,41 +50,18 @@ class UserDestroyAPIView(generics.DestroyAPIView):
 class UserRetrieveAPIView(generics.RetrieveAPIView):
     queryset = User.objects.all()
 
-
     def get_serializer_class(self):
         if self.get_object() == self.request.user:
             return UserSerializer
         return OtherUserSerializer
 
 
-class PaymentListAPIView(generics.ListAPIView):
+class PaymentListAPIView(generics.ListCreateAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ["payment_method", "paid_course", "paid_lesson"]
     ordering_fields = ["payment_date"]
-
-
-class PaymentCreateAPIView(generics.CreateAPIView):
-    queryset = Payment.objects.all()
-    serializer_class = PaymentSerializer
-
-    def perform_create(self, serializer):
-        payment = serializer.save(user=self.request.user)
-        product = payment.paid_course or payment.paid_lesson
-        product_name = create_stripe_product(product)
-        price = create_stripe_price(payment.amount, product_name)
-        session_id, payment_link = create_stripe_session(price)
-        payment.session_id = session_id
-        payment.link = payment_link
-        payment.save()
-
-
-class SessionRetrieveAPIView(views.APIView):
-    def get(self, request):
-        session_id = request.data.get("session_id")
-        session_status = check_session_status(session_id)
-        return Response({"session_status": session_status})
 
 
 class UserTokenObtainPairView(TokenObtainPairView):
