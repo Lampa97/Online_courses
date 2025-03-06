@@ -1,4 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, views
 from rest_framework.filters import OrderingFilter
 from rest_framework.generics import get_object_or_404
@@ -46,9 +47,10 @@ class UserDestroyAPIView(generics.DestroyAPIView):
     serializer_class = UserSerializer
     permission_classes = (IsAdmin,)
 
-
+@swagger_auto_schema(operation_description="description")
 class UserRetrieveAPIView(generics.RetrieveAPIView):
     queryset = User.objects.all()
+
 
     def get_serializer_class(self):
         if self.get_object() == self.request.user:
