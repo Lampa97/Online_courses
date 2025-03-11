@@ -98,7 +98,8 @@ class SubscriptionAPIView(views.APIView):
     serializer_class = SubscriptionSerializer
 
     def post(self, *args, **kwargs):
-        user = self.request.user
+        user = self.request.data.get("user")
+        user = get_object_or_404(User, pk=user)
         course_id = self.request.data.get("course")
         course_item = get_object_or_404(Course, pk=course_id)
 
