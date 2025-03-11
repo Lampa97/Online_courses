@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, views
@@ -91,6 +92,13 @@ class SessionRetrieveAPIView(views.APIView):
 class UserTokenObtainPairView(TokenObtainPairView):
     serializer_class = UserTokenObtainPairSerializer
     permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        user = User.objects.get(email=request.data['email'])
+        user.last_login = timezone.now()
+        user.save()
+        return response
 
 
 class SubscriptionAPIView(views.APIView):
