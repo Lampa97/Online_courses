@@ -1,9 +1,11 @@
-[tool.poetry]
+[project]
 name = "online-courses"
 version = "0.1.0"
 description = ""
-authors = ["Roman.Iastremskyi <iastremskyi010397@gmail.com>"]
+authors = [{name = "Roman Iastremskyi", email = "iastremskyi010397@gmail.com"}]
 readme = "README.md"
+requires-python = "^3.12"
+dynamic = ["dependencies", "version"]
 
 [tool.poetry.dependencies]
 python = "^3.12"
