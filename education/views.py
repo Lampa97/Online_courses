@@ -3,7 +3,6 @@ from rest_framework import generics, status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from users.models import Subscription
 from .models import Course, Lesson
 from .paginators import CustomPagination
 from .permissions import IsModerator, IsOwner

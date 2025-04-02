@@ -1,6 +1,6 @@
 from celery import shared_task
 from django.core.mail import send_mail
-from config import settings
+from django.conf import settings
 from users.models import Subscription
 
 @shared_task

@@ -2,8 +2,6 @@ services:
   backend:
     build: .
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-    environment:
-      - DATABASE_HOST=db
     env_file:
       - .env
     volumes:
@@ -39,23 +37,28 @@ services:
       - .:/cache
 
   celery:
-    image: celery
-    command: bash -c "celery -A config worker -l INFO -P eventlet"
+    build: .
+    command: celery -A config worker -l INFO
     env_file:
       - ./.env
     depends_on:
       - redis
       - db
+      - backend
 
   celery-beat:
-    image: celery
-    command: bash -c "celery -A config beat -l INFO --pool=solo"
+    build: .
+    command: celery -A config beat -l INFO
     env_file:
       - ./.env
     depends_on:
       - redis
       - db
+      - backend
 
 volumes:
   postgres_data:
   static_volume:
+
+networks:
+  default:

@@ -80,7 +80,7 @@ DATABASES = {
         "USER": os.getenv("POSTGRES_USER"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
         "HOST": os.getenv("POSTGRES_HOST"),
-        "PORT": os.getenv("DATABASE_PORT"),
+        "PORT": os.getenv("POSTGRES_PORT"),
     }
 }
 
@@ -144,7 +144,7 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BEAT_SCHEDULE = {
     'check_user_status': {
         'task': 'users.tasks.check_user_status',
-        'schedule': timedelta(days=1),
+        'schedule': timedelta(minutes=1),
     },
 }
 

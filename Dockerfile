@@ -12,8 +12,11 @@ RUN pip install --no-cache-dir poetry
 COPY pyproject.toml poetry.lock ./
 
 RUN poetry config virtualenvs.create false
-RUN poetry install --no-root -vvv
+RUN poetry install --no-root
 
 COPY . .
+
+ENV PYTHONPATH=/code
+ENV PYTHONUNBUFFERED=1
 
 EXPOSE 8000
