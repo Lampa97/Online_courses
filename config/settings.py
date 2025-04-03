@@ -144,7 +144,7 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BEAT_SCHEDULE = {
     'check_user_status': {
         'task': 'users.tasks.check_user_status',
-        'schedule': timedelta(minutes=1),
+        'schedule': timedelta(days=1),
     },
 }
 
