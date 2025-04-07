@@ -3,7 +3,6 @@ from rest_framework import generics, status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from users.models import Subscription
 from .models import Course, Lesson
 from .paginators import CustomPagination
 from .permissions import IsModerator, IsOwner
@@ -15,10 +14,6 @@ class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     pagination_class = CustomPagination
 
-    def get_serializer_context(self):
-        context = super().get_serializer_context()
-        context.update({"request": self.request})
-        return context
 
     def get_permissions(self):
         if self.action == "create":
