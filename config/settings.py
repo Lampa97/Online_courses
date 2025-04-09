@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "drf_yasg",
-    'django_celery_beat',
+    "django_celery_beat",
     "rest_framework",
     "django_filters",
     "users",
@@ -117,9 +117,6 @@ SIMPLE_JWT = {
 }
 
 
-
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -142,9 +139,9 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 CELERY_BEAT_SCHEDULE = {
-    'check_user_status': {
-        'task': 'users.tasks.check_user_status',
-        'schedule': timedelta(days=1),
+    "check_user_status": {
+        "task": "users.tasks.check_user_status",
+        "schedule": timedelta(days=1),
     },
 }
 

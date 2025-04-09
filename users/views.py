@@ -6,13 +6,14 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .services import create_stripe_price, create_stripe_session, create_stripe_product, check_session_status
+
 from education.models import Course
 
 from .models import Payment, Subscription, User
 from .permissions import IsAdmin, IsOwner
 from .serializers import (OtherUserSerializer, PaymentSerializer, SubscriptionSerializer, UserSerializer,
                           UserTokenObtainPairSerializer)
+from .services import check_session_status, create_stripe_price, create_stripe_product, create_stripe_session
 
 
 class UserListAPIView(generics.ListAPIView):
@@ -50,7 +51,6 @@ class UserDestroyAPIView(generics.DestroyAPIView):
 
 class UserRetrieveAPIView(generics.RetrieveAPIView):
     queryset = User.objects.all()
-
 
     def get_serializer_class(self):
         if self.get_object() == self.request.user:
@@ -94,7 +94,7 @@ class UserTokenObtainPairView(TokenObtainPairView):
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
-        user = User.objects.get(email=request.data['email'])
+        user = User.objects.get(email=request.data["email"])
         user.last_login = timezone.now()
         user.save()
         return response

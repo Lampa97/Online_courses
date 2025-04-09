@@ -13,7 +13,6 @@ class Course(models.Model):
         User, on_delete=models.CASCADE, blank=True, null=True, related_name="courses", verbose_name="Owner"
     )
 
-
     class Meta:
         verbose_name = "Course"
         verbose_name_plural = "Courses"

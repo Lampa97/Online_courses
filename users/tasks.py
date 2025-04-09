@@ -3,6 +3,7 @@ from django.utils import timezone
 
 from .models import User
 
+
 @shared_task
 def check_user_status():
     today = timezone.now()
@@ -17,4 +18,3 @@ def check_user_status():
                     user.save()
         else:
             print(f"User {user.email} has never logged in.")
-

@@ -9,11 +9,11 @@ from .permissions import IsModerator, IsOwner
 from .serializers import CourseSerializer, LessonSerializer
 from .tasks import send_update_course_message
 
+
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     pagination_class = CustomPagination
-
 
     def get_permissions(self):
         if self.action == "create":
