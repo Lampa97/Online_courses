@@ -20,11 +20,13 @@ celery = "^5.4.0"
 redis = "^5.2.1"
 eventlet = "^0.39.1"
 django-celery-beat = "^2.7.0"
+pillow = "^11.1.0"
+python-dotenv = "^1.0.1"
+gunicorn = "^23.0.0"
+django-redis = "^5.4.0"
 
 
 [tool.poetry.group.dev.dependencies]
-pillow = "^11.1.0"
-python-dotenv = "^1.0.1"
 coverage = "^7.6.12"
 
 
