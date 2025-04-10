@@ -16,6 +16,18 @@ RUN poetry install --no-root
 
 COPY . .
 
+RUN echo "POSTGRES_USER=${POSTGRES_USER}" >> .env && \
+    echo "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}" >> .env && \
+    echo "POSTGRES_DB=${POSTGRES_DB}" >> .env && \
+    echo "POSTGRES_HOST=db" >> .env && \
+    echo "POSTGRES_PORT=${POSTGRES_PORT}" >> .env && \
+    echo "SECRET_KEY=${SECRET_KEY}" >> .env && \
+    echo "DEBUG=${DEBUG}" >> .env && \
+    echo "REDIS_HOST=redis://redis:6379//" >> .env && \
+    echo "CELERY_BROKER_URL=redis://redis:6379/1" >> .env && \
+    echo "CELERY_RESULT_BACKEND=redis://redis:6379/1" >> .env && \
+    cat .env
+
 ENV PYTHONPATH=/code
 ENV PYTHONUNBUFFERED=1
 
