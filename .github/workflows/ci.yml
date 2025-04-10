@@ -56,7 +56,7 @@ jobs:
 
       - name: Activate environment
         run: |
-          poetry shell
+          poetry env activate
 
       - name: Install dependencies
         run: |
