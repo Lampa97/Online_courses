@@ -99,14 +99,19 @@ jobs:
           sudo apt-get update
           
           sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+          
+          sudo ufw enable
+          sudo ufw allow 80/tcp
+          sudo ufw allow 443/tcp
+          
           echo "Running commands on the remote server"
           docker --version
           sudo systemctl start docker
           sudo systemctl enable docker
-          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }}
-          sudo docker stop myapp || true
-          sudo docker rm myapp || true
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
+          sudo docker stop courses || true
+          sudo docker rm courses || true
           echo "Running Docker container"
-          sudo docker run --name myapp -p 80:8000 ${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }}
+          sudo docker run --name courses -p 80:8000 ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
           EOF
 
