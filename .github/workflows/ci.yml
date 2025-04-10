@@ -134,11 +134,13 @@ jobs:
           sudo ufw allow 80/tcp
           sudo ufw allow 443/tcp
           
-          sudo needrestart -r a
-          
           sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
           
-
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose-plugin
+          docker-compose version
           
       - name: Deploy to server
         run: | 
