@@ -58,6 +58,10 @@ jobs:
         run: |
           poetry install --no-root
 
+      - name: Activate environment
+        run: |
+          poetry env activate
+
       - name: Check PostgreSQL connection
         run: pg_isready -h localhost -p 5432 -U postgres
 
