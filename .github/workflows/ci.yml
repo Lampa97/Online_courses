@@ -117,7 +117,7 @@ jobs:
       - name: Set up SSH config
         run: |
             sudo ufw allow 22/tcp
-            sudo ufw reload
+            sudo ufw --force enable
 
       - name: Install Docker on the server
         run: |
