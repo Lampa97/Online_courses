@@ -114,15 +114,9 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
-      - name: Set up SSH config
-        run: |
-            sudo ufw --force enable
-            sudo ufw allow proto icmp
-            sudo ufw allow 22/tcp
-
       - name: Install Docker on the server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}
           sudo ufw --force enable
           sudo ufw allow 22/tcp
           sudo ufw allow 80/tcp
@@ -154,6 +148,6 @@ jobs:
           echo "Running Docker container"
           sudo ls -a
           sudo docker run --name courses -p 80:8000 ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
-          EOF
+          
           
 
