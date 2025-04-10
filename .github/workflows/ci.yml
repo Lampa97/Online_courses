@@ -139,15 +139,12 @@ jobs:
           sudo ufw allow 80/tcp
           sudo ufw allow 443/tcp
           docker --version
-          docker-compose version
           sudo systemctl start docker
           sudo systemctl enable docker
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
           sudo docker stop courses || true
           sudo docker rm courses || true
           echo "Running Docker container"
-          sudo docker-compose down || true
-          sudo docker-compose pull
-          sudo docker-compose up --build
+          docker run --name courses -p 80:8000 ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
           
 
