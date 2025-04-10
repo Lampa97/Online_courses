@@ -73,6 +73,7 @@ jobs:
           echo "POSTGRES_HOST=localhost" >> .env
           echo "POSTGRES_PORT=${{vars.POSTGRES_PORT}}" >> .env
           echo "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
+          cat .env
 
       - name: Run migrate
         run: python manage.py migrate
