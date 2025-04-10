@@ -116,7 +116,7 @@ jobs:
 
       - name: Install Docker on the server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
 
           sudo apt-get update
           sudo apt-get install ca-certificates curl
@@ -146,8 +146,9 @@ jobs:
           sudo docker stop courses || true
           sudo docker rm courses || true
           echo "Running Docker container"
-          sudo ls -la
+          sudo ls -a
+          sudo pwd
           sudo docker run --name courses -p 80:8000 ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
-
+          EOF
           
 
