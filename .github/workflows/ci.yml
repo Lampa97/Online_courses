@@ -146,6 +146,8 @@ jobs:
           sudo docker stop courses || true
           sudo docker rm courses || true
           echo "Running Docker container"
+          sudo ls -la
+          cd /courses
           sudo docker compose down || true
           sudo docker compose pull
           sudo docker compose up --build
