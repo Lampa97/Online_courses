@@ -119,6 +119,9 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           sudo apt-get update
           sudo apt-get upgrade -y
+          sudo ufw enable
+          sudo ufw allow 80/tcp
+          sudo ufw allow 443/tcp
           sudo apt-get install ca-certificates curl
           sudo install -m 0755 -d /etc/apt/keyrings
           sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
@@ -130,19 +133,12 @@ jobs:
             sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
           
-          sudo ufw enable
-          sudo ufw allow 80/tcp
-          sudo ufw allow 443/tcp
           
           sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
           
           
       - name: Deploy to server
         run: |
-          sudo ufw enable
-          sudo ufw allow 80/tcp
-          sudo ufw allow 443/tcp
-          sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
           echo "Running commands on the remote server"
           docker --version
           docker-compose version
