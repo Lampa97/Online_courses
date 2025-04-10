@@ -64,7 +64,14 @@ jobs:
       - name: Check PostgreSQL connection
         run: | 
           pg_isready -h localhost -p 5432 -U postgres
-          python -m django --version
+
+      - name: Fill up .env file
+        run: |
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env
+          echo "POSTGRES_HOST=localhost" >> .env
+          echo "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
 
       - name: Run migrate
         run: python manage.py migrate
