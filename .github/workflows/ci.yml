@@ -79,6 +79,11 @@ jobs:
           echo "CELERY_RESULT_BACKEND=redis://localhost:6379/1" >> .env
           cat .env
 
+      - name: Install Redis
+        run: |
+          sudo apt-get update
+          sudo apt-get install redis-server -y
+
       - name: Run migrate
         run: python manage.py migrate
 
