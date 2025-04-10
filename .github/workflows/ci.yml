@@ -89,6 +89,7 @@ jobs:
 
       - name: Run tests
         run: |
+          sudo netstat -tuln | grep 6379
           redis-server
           python manage.py test
 
