@@ -16,6 +16,8 @@ RUN poetry install --no-root
 
 COPY . .
 
+RUN mkdir -p /code/staticfiles && chmod -R 755 /code/staticfiles
+
 ENV PYTHONPATH=/code
 ENV PYTHONUNBUFFERED=1
 
