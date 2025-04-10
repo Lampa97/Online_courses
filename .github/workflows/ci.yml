@@ -74,23 +74,17 @@ jobs:
           echo "POSTGRES_PORT=${{vars.POSTGRES_PORT}}" >> .env
           echo "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
           echo "DEBUG=${{ vars.DEBUG }}" >> .env
-          echo "REDIS_HOST=redis://localhost:6379//" >> .env
-          echo "CELERY_BROKER_URL=redis://localhost:6379/1" >> .env
-          echo "CELERY_RESULT_BACKEND=redis://localhost:6379/1" >> .env
+          echo "REDIS_HOST=memory://" >> .env
+          echo "CELERY_BROKER_URL=memory://" >> .env
+          echo "CELERY_RESULT_BACKEND=memory://" >> .env
           cat .env
 
-      - name: Install Redis
-        run: |
-          sudo apt-get update
-          sudo apt-get install redis-server -y
 
       - name: Run migrate
         run: python manage.py migrate
 
       - name: Run tests
         run: |
-          sudo netstat -tuln | grep 6379
-          redis-server
           python manage.py test
 
   build:
