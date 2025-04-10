@@ -54,13 +54,14 @@ jobs:
           pipx ensurepath
           pipx install poetry
 
+      - name: Activate environment
+        run: |
+          poetry shell
+
       - name: Install dependencies
         run: |
           poetry install --no-root
 
-      - name: Activate environment
-        run: |
-          poetry env activate
 
       - name: Check PostgreSQL connection
         run: pg_isready -h localhost -p 5432 -U postgres
