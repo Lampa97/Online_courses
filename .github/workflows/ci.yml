@@ -83,7 +83,9 @@ jobs:
         run: python manage.py migrate
 
       - name: Run tests
-        run: python manage.py test
+        run: |
+          redis-server
+          python manage.py test
 
   build:
     runs-on: ubuntu-latest
