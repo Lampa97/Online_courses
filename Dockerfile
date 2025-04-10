@@ -20,3 +20,5 @@ ENV PYTHONPATH=/code
 ENV PYTHONUNBUFFERED=1
 
 EXPOSE 8000
+
+CMD ["sh", "-c", "python manage.py runserver"]
