@@ -73,6 +73,10 @@ jobs:
           echo "POSTGRES_HOST=localhost" >> .env
           echo "POSTGRES_PORT=${{vars.POSTGRES_PORT}}" >> .env
           echo "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
+          echo "DEBUG=${{ vars.DEBUG }}" >> .env
+          echo "REDIS_HOST=redis://localhost:6379//" >> .env
+          echo "CELERY_BROKER_URL=redis://localhost:6379/1" >> .env
+          echo "CELERY_RESULT_BACKEND=redis://localhost:6379/1" >> .env
           cat .env
 
       - name: Run migrate
