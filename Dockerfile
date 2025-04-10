@@ -7,18 +7,10 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir poetry
+EXPOSE 8000
 
-COPY pyproject.toml poetry.lock ./
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN poetry config virtualenvs.create false
-RUN poetry install --no-root
 
 COPY . .
-
-RUN mkdir -p /code/staticfiles && chmod -R 755 /code/staticfiles
-
-ENV PYTHONPATH=/code
-ENV PYTHONUNBUFFERED=1
-
-EXPOSE 8000
