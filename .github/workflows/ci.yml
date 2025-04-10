@@ -65,7 +65,8 @@ jobs:
 
 
       - name: Check PostgreSQL connection
-        run: pg_isready -h localhost -p 5432 -U postgres
+        run: | 
+          pg_isready -h localhost -p 5432 -U postgres
           python -m django --version
 
       - name: Run migrate
