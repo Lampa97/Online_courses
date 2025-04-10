@@ -57,6 +57,7 @@ jobs:
       - name: Activate environment
         run: |
           poetry env activate
+          export PYTHONPATH=$(pwd)
 
       - name: Install dependencies
         run: |
@@ -65,6 +66,7 @@ jobs:
 
       - name: Check PostgreSQL connection
         run: pg_isready -h localhost -p 5432 -U postgres
+          python -m django --version
 
       - name: Run migrate
         run: python manage.py migrate
