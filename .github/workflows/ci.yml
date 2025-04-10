@@ -45,7 +45,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          poetry install
+          poetry install --no-root
 
       - name: Check PostgreSQL connection
         run: pg_isready -h localhost -p 5432 -U postgres
