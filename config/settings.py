@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django_filters",
     "users",
     "education",
+    "django_celery_results",
 ]
 
 MIDDLEWARE = [

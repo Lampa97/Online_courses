@@ -76,7 +76,7 @@ jobs:
           echo "DEBUG=${{ vars.DEBUG }}" >> .env
           echo "REDIS_HOST=memory://" >> .env
           echo "CELERY_BROKER_URL=memory://" >> .env
-          echo "CELERY_RESULT_BACKEND=memory://" >> .env
+          echo "CELERY_RESULT_BACKEND=django_db" >> .env
           cat .env
 
 
