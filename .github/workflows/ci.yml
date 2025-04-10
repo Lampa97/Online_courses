@@ -114,7 +114,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
-      - name: Deploy to server
+      - name: Install Docker on the server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           sudo apt-get update
@@ -128,6 +128,9 @@ jobs:
             $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
             sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
           sudo apt-get update
+          sudo apt-get upgrade -y
+          
+          sudo needrestart -r a
           
           sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
           
@@ -135,6 +138,8 @@ jobs:
           sudo ufw allow 80/tcp
           sudo ufw allow 443/tcp
           
+      - name: Deploy to server
+        run: | 
           echo "Running commands on the remote server"
           docker --version
           sudo systemctl start docker
@@ -145,6 +150,6 @@ jobs:
           echo "Running Docker container"
           sudo docker-compose down || true
           sudo docker-compose pull
-          sudo docker-compose up -d --build
+          sudo docker-compose up --build
           EOF
 
