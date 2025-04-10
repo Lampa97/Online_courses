@@ -37,7 +37,6 @@ services:
       - .:/cache
 
   celery:
-    build: .
     command: celery -A config worker -l INFO
     env_file:
       - ./.env
@@ -47,7 +46,6 @@ services:
       - backend
 
   celery-beat:
-    build: .
     command: celery -A config beat -l INFO
     env_file:
       - ./.env
