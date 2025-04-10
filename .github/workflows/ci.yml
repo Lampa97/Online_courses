@@ -147,9 +147,7 @@ jobs:
           sudo docker rm courses || true
           echo "Running Docker container"
           sudo ls -la
-          cd /courses
-          sudo docker compose down || true
-          sudo docker compose pull
-          sudo docker compose up --build
+          sudo docker run --name courses -p 80:8000 ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
+
           
 
