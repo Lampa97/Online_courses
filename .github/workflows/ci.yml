@@ -117,6 +117,9 @@ jobs:
       - name: Install Docker on the server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+          sudo ufw --force enable
+          sudo ufw allow 80/tcp
+          sudo ufw allow 443/tcp
           sudo ls -a
           sudo pwd
           sudo apt-get update
@@ -136,9 +139,6 @@ jobs:
           sudo apt-get update
           
           echo "Running commands on the remote server"
-          sudo ufw enable
-          sudo ufw allow 80/tcp
-          sudo ufw allow 443/tcp
           docker --version
           docker compose version
           sudo systemctl start docker
