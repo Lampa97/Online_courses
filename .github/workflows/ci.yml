@@ -116,8 +116,9 @@ jobs:
 
       - name: Set up SSH config
         run: |
-            sudo ufw allow 22/tcp
             sudo ufw --force enable
+            sudo ufw allow proto icmp
+            sudo ufw allow 22/tcp
 
       - name: Install Docker on the server
         run: |
