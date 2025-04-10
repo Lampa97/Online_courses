@@ -12,6 +12,17 @@ EXPOSE 8000
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN echo "POSTGRES_USER=${POSTGRES_USER}" >> .env && \
+    echo "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}" >> .env && \
+    echo "POSTGRES_DB=${POSTGRES_DB}" >> .env && \
+    echo "POSTGRES_HOST=${POSTGRES_HOST}" >> .env && \
+    echo "POSTGRES_PORT=${POSTGRES_PORT}" >> .env && \
+    echo "SECRET_KEY=${SECRET_KEY}" >> .env && \
+    echo "DEBUG=${DEBUG}" >> .env && \
+    echo "REDIS_HOST=${REDIS_HOST}" >> .env && \
+    echo "CELERY_BROKER_URL={$CELERY_BROKER_URL}" >> .env && \
+    echo "CELERY_RESULT_BACKEND={$CELERY_RESULT_BACKEND}" >> .env && \
+    cat .env
 
 COPY . .
 
