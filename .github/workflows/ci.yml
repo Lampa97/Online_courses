@@ -114,6 +114,11 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
+      - name: Set up SSH config
+        run: |
+            sudo ufw allow 22/tcp
+            sudo ufw reload
+
       - name: Install Docker on the server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
