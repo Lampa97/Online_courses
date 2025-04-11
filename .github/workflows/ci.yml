@@ -114,15 +114,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
-      - name: Copy files via SCP
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          source: "./"
-          target: "./"
-
       - name: Install Docker on the server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
@@ -141,25 +132,25 @@ jobs:
             "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
             $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
             sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-          sudo apt-get update
   
           sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
           sudo apt-get update
+          sudo apt-get install -y git
+          sudo git --version
+          git clone https://github.com/Lampa97/Online_courses.git
+          cd Online_courses
           
           echo "Running commands on the remote server"
-          sudo mkdir -p /code
-          sudo git clone -b homework_35_2 git@github.com:Lampa97/Online_courses.git .
-          scp docker-compose.yml .env ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:/code
           docker --version
           docker compose version
           sudo systemctl start docker
           sudo systemctl enable docker
+          sudo docker compose up -d --build
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
           sudo docker stop courses || true
           sudo docker rm courses || true
           echo "Running Docker container"
           sudo ls -a
-          sudo docker compose up -d --build
           sudo pwd
           sudo ls -a
           sudo docker ps -a
