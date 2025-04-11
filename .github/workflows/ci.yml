@@ -138,6 +138,7 @@ jobs:
           sudo apt-get update
           
           echo "Running commands on the remote server"
+          scp docker-compose.yml .env ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:/code
           docker --version
           docker compose version
           sudo systemctl start docker
@@ -146,6 +147,7 @@ jobs:
           sudo docker stop courses || true
           sudo docker rm courses || true
           echo "Running Docker container"
+          docker rm -v $(docker ps --filter status=exited -q)
           sudo ls -a
           sudo docker run -d --name courses -p 80:8000 ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
           sudo pwd
