@@ -166,7 +166,7 @@ jobs:
           docker compose version
           sudo systemctl start docker
           sudo systemctl enable docker
-          sudo docker compose up -d --build
+          sudo docker compose up --build
           EOF
           
 
