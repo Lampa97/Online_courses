@@ -152,7 +152,6 @@ jobs:
           echo "Static folder does not exist. Creating it now."
           mkdir static
           fi
-          sudo ls -a
           
           echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
@@ -170,7 +169,7 @@ jobs:
           echo "EMAIL_HOST_PASSWORD=${{secrets.EMAIL_HOST_PASSWORD}}" >> .env
           echo "EMAIL_HOST_USER=${{secrets.EMAIL_HOST_USER}}" >> .env
           echo "STRIPE_API_KEY=${{secrets.STRIPE_API_KEY}}" >> .env
-          sudo apt install python3.12-venv
+          sudo apt install -y python3.12-venv
           python3 -m venv venv
           source venv/bin/activate
           python3 manage.py migrate
