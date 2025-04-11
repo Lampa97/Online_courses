@@ -102,7 +102,7 @@ jobs:
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }} .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/courses:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -142,12 +142,12 @@ jobs:
           docker compose version
           sudo systemctl start docker
           sudo systemctl enable docker
-          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/courses:latest
           sudo docker stop courses || true
           sudo docker rm courses || true
           echo "Running Docker container"
           sudo ls -a
-          sudo docker run -d --name courses -p 80:8000 ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
+          sudo docker run -d --name courses -p 80:8000 ${{ secrets.DOCKER_USERNAME }}/courses:latest
           sudo pwd
           sudo mkdir -p /code
           sudo sh -c  "cd code"
