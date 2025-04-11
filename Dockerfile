@@ -15,4 +15,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["docker compose", "up", "--build"]
