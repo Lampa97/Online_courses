@@ -150,7 +150,7 @@ jobs:
           sudo docker run -d --name courses -p 80:8000 ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
           sudo pwd
           sudo mkdir -p /code
-          sudo -D code
+          sudo sh -c  "cd code"
           sudo docker compose up --build 
           sudo ls -a
           sudo docker ps -a
