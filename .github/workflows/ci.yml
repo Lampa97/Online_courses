@@ -149,8 +149,7 @@ jobs:
           sudo ls -a
           sudo docker run -d --name courses -p 80:8000 ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
           sudo pwd
-          sudo mkdir -p /code
-          sudo docker-compose -H "${{ secrets.SSH_USER }}@${{secrets.SERVER_IP}}" up 
+          sudo mkdir -p /code 
           sudo ls -a
           sudo docker ps -a
           sudo docker logs courses
