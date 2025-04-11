@@ -170,8 +170,8 @@ jobs:
           echo "EMAIL_HOST_PASSWORD=${{secrets.EMAIL_HOST_PASSWORD}}" >> .env
           echo "EMAIL_HOST_USER=${{secrets.EMAIL_HOST_USER}}" >> .env
           echo "STRIPE_API_KEY=${{secrets.STRIPE_API_KEY}}" >> .env
-          python manage.py migrate
-          python manage.py createadmin
+          python3 manage.py migrate
+          python3 manage.py createadmin
           
           echo "Running commands on the remote server"
           docker --version
