@@ -120,6 +120,7 @@ jobs:
           sudo ls -a
           sudo pwd
           sudo bash -c "cd .."
+          sudo pwd
           
           sudo ls -a
           rsync -avzvv --exclude '__pycache__' -e "ssh -o StrictHostKeyChecking=no" . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:./
