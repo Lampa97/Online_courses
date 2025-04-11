@@ -170,6 +170,9 @@ jobs:
           docker compose version
           sudo systemctl start docker
           sudo systemctl enable docker
+          sudo sysctl vm.overcommit_memory=1
+          sudo docker compose down || true
+          sudo docker system prune -f
           sudo docker compose up --build
           EOF
           
