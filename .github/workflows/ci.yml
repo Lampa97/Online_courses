@@ -121,6 +121,10 @@ jobs:
           sudo ufw allow 22/tcp
           sudo ufw allow 80/tcp
           sudo ufw allow 443/tcp
+          sudo ufw allow 5432/tcp
+          sudo ufw allow 6379/tcp
+          sudo ufw allow 8000/tcp
+          sudo ufw allow 587/tcp
           sudo apt-get update
           sudo apt-get install ca-certificates curl
           sudo install -m 0755 -d /etc/apt/keyrings
