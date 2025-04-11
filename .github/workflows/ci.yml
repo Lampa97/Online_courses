@@ -145,6 +145,12 @@ jobs:
           cd Online_courses
           git fetch --all
           git reset --hard origin/homework_35_2
+          if [ -d "static" ]; then
+          echo "Static folder exists."
+          else
+          echo "Static folder does not exist. Creating it now."
+          mkdir static
+          fi
           sudo ls -a
           
           echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
