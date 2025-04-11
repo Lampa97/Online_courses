@@ -139,6 +139,7 @@ jobs:
           sudo git --version
           git clone https://github.com/Lampa97/Online_courses.git
           cd Online_courses
+          sudo ls-a
           
           echo "Running commands on the remote server"
           docker --version
