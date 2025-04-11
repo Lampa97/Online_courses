@@ -137,7 +137,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y git
           sudo git --version
-          git clone --branch homework_35_2 git@github.com:Lampa97/Online_courses.git
+          git clone --branch homework_35_2 https://github.com/Lampa97/Online_courses.git
           cd Online_courses
           git fetch --all
           git reset --hard origin/homework_35_2
