@@ -154,7 +154,7 @@ jobs:
           sudo docker compose up --build 
           sudo ls -a
           sudo docker ps -a
-          sudo docker logs 6cddf92a3327
+          sudo docker logs courses
           sudo ls -a
           EOF
           
