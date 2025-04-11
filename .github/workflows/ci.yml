@@ -137,9 +137,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y git
           sudo git --version
-          git clone https://github.com/Lampa97/Online_courses.git
+          git clone --branch homework_35_2 git@github.com:Lampa97/Online_courses.git
           cd Online_courses
-          git checkout ${{ github.sha }}
+          git fetch --all
+          git reset --hard origin/homework_35_2
           sudo ls -a
           
           echo "Running commands on the remote server"
