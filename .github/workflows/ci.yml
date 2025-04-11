@@ -148,8 +148,8 @@ jobs:
           echo "Running Docker container"
           sudo ls -a
           sudo mkdir -p /code
-          sudo docker run -v ./code:/code -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
           sudo cd code
+          sudo docker compose up --build 
           sudo ls -a
           sudo docker ps -a
           sudo docker logs courses
