@@ -147,8 +147,10 @@ jobs:
           sudo docker rm courses || true
           echo "Running Docker container"
           sudo ls -a
+          sudo docker run -d --name courses -p 80:8000 ${{ secrets.DOCKER_HUB_USERNAME }}/courses:${{ github.sha }}
+          sudo pwd
           sudo mkdir -p /code
-          sudo cd -s code
+          sudo -D code
           sudo docker compose up --build 
           sudo ls -a
           sudo docker ps -a
