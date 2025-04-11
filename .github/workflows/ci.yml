@@ -148,11 +148,11 @@ jobs:
           echo "Running Docker container"
           sudo ls -a
           sudo mkdir -p /code
-          sudo cd code
+          sudo cd -s code
           sudo docker compose up --build 
           sudo ls -a
           sudo docker ps -a
-          sudo docker logs courses
+          sudo docker logs 6cddf92a3327
           sudo ls -a
           EOF
           
