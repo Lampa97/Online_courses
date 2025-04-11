@@ -118,6 +118,8 @@ jobs:
         run: |
           sudo mkdir -p /code
           sudo ls -a
+          sudo bash -c "cd -"
+          sudo ls -a
           rsync -avzvv --exclude '__pycache__' -e "ssh -o StrictHostKeyChecking=no" . ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:./
 
       - name: Install Docker on the server
