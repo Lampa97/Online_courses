@@ -167,10 +167,6 @@ jobs:
           sudo systemctl start docker
           sudo systemctl enable docker
           sudo docker compose up -d --build
-          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/courses:${{ github.sha }}
-          sudo docker stop courses || true
-          sudo docker rm courses || true
-          echo "Running Docker container"
           EOF
           
 
