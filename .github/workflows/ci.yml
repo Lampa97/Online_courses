@@ -143,6 +143,24 @@ jobs:
           git reset --hard origin/homework_35_2
           sudo ls -a
           
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+          echo "POSTGRES_DB=${{ vars.POSTGRES_DB }}" >> .env
+          echo "POSTGRES_HOST=localhost" >> .env
+          echo "POSTGRES_PORT=${{vars.POSTGRES_PORT}}" >> .env
+          echo "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
+          echo "DEBUG=${{ vars.DEBUG }}" >> .env
+          echo "REDIS_HOST=${{vars.REDIS_HOST}}" >> .env
+          echo "CELERY_BROKER_URL=${{vars.CELERY_BROKER_URL}}" >> .env
+          echo "CELERY_RESULT_BACKEND=${{vars.CELERY_RESULT_BACKEND}}" >> .env
+          echo "EMAIL_HOST=${{vars.EMAIL_HOST}}" >> .env
+          echo "EMAIL_PORT=${{vars.EMAIL_PORT}}" >> .env
+          echo "EMAIL_USE_TLS=${{vars.EMAIL_USE_TLS}}" >> .env
+          echo "EMAIL_HOST_PASSWORD=${{secrets.EMAIL_HOST_PASSWORD}}" >> .env
+          echo "EMAIL_HOST_USER=${{secrets.EMAIL_HOST_USER}}" >> .env
+          echo "STRIPE_API_KEY=${{secrets.STRIPE_API_KEY}}" >> .env
+          
+          
           echo "Running commands on the remote server"
           docker --version
           docker compose version
@@ -153,12 +171,6 @@ jobs:
           sudo docker stop courses || true
           sudo docker rm courses || true
           echo "Running Docker container"
-          sudo ls -a
-          sudo pwd
-          sudo ls -a
-          sudo docker ps -a
-          sudo docker logs courses
-          sudo ls -a
           EOF
           
 
