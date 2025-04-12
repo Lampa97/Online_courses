@@ -169,21 +169,21 @@ jobs:
           mkdir static
           fi
           
-          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}"
-          "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}"
-          "POSTGRES_DB=${{ vars.POSTGRES_DB }}"
-          "POSTGRES_HOST=${{ vars.POSTGRES_HOST }}"
-          "POSTGRES_PORT=${{vars.POSTGRES_PORT}}"
-          "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}"
-          "DEBUG=${{ vars.DEBUG }}"
-          "REDIS_HOST=${{vars.REDIS_HOST}}"
-          "CELERY_BROKER_URL=${{vars.CELERY_BROKER_URL}}"
-          "CELERY_RESULT_BACKEND=${{vars.CELERY_RESULT_BACKEND}}"
-          "EMAIL_HOST=${{vars.EMAIL_HOST}}"
-          "EMAIL_PORT=${{vars.EMAIL_PORT}}"
-          "EMAIL_USE_TLS=${{vars.EMAIL_USE_TLS}}"
-          "EMAIL_HOST_PASSWORD=${{secrets.EMAIL_HOST_PASSWORD}}"
-          "EMAIL_HOST_USER=${{secrets.EMAIL_HOST_USER}}"
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" \
+          "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" \
+          "POSTGRES_DB=${{ vars.POSTGRES_DB }}" \
+          "POSTGRES_HOST=${{ vars.POSTGRES_HOST }}" \
+          "POSTGRES_PORT=${{vars.POSTGRES_PORT}}" \
+          "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" \
+          "DEBUG=${{ vars.DEBUG }}" \
+          "REDIS_HOST=${{vars.REDIS_HOST}}" \
+          "CELERY_BROKER_URL=${{vars.CELERY_BROKER_URL}}" \
+          "CELERY_RESULT_BACKEND=${{vars.CELERY_RESULT_BACKEND}}" \
+          "EMAIL_HOST=${{vars.EMAIL_HOST}}" \
+          "EMAIL_PORT=${{vars.EMAIL_PORT}}" \
+          "EMAIL_USE_TLS=${{vars.EMAIL_USE_TLS}}" \
+          "EMAIL_HOST_PASSWORD=${{secrets.EMAIL_HOST_PASSWORD}}" \
+          "EMAIL_HOST_USER=${{secrets.EMAIL_HOST_USER}}" \
           "STRIPE_API_KEY=${{secrets.STRIPE_API_KEY}}" > .env
           
         # Section 5: Install venv dependency and create virtual environment
