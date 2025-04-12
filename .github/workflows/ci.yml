@@ -118,7 +118,7 @@ jobs:
         run: |
             ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
 
-            echo "Firewall setup"
+            echo "Step 1: Firewall setup"
             
             sudo ufw --force enable
             sudo ufw allow 22/tcp
@@ -130,7 +130,7 @@ jobs:
             sudo ufw allow 587/tcp
             
         
-            echo "Installing Docker and Docker Compose"
+            echo "Step 2: Installing Docker and Docker Compose"
             
             sudo apt-get update
             sudo apt-get install ca-certificates curl
@@ -148,7 +148,7 @@ jobs:
             sudo apt-get update
             
         
-            echo "Installing git and cloning the repository"
+            echo "Step 3: Installing git and cloning the repository"
             
             sudo apt-get install -y git
             sudo git --version
@@ -159,7 +159,7 @@ jobs:
             git reset --hard origin/homework_35_2
             
         
-            echo "Creating .env file and static folder"
+            echo "Step 4: Creating .env file and static folder"
             
             if [ -d "static" ]; then
             echo "Static folder exists."
@@ -186,20 +186,20 @@ jobs:
              echo "STRIPE_API_KEY=${{ secrets.STRIPE_API_KEY }}" >> .env
             
         
-            echo "Installing venv dependency and creating virtual environment"
+            echo "Step 5: Installing venv dependency and creating virtual environment"
             
             sudo apt install -y python3.12-venv
             python3 -m venv venv
             source venv/bin/activate
             
         
-            echo "Running migrations and creating superuser"
+            echo "Step 6: Running migrations and creating superuser"
             
             python3 manage.py migrate
             python3 manage.py createadmin
             
         
-            echo "Running commands on the remote server"
+            echo "Step 7: Running docker commands on the remote server"
             docker --version
             docker compose version
             sudo systemctl start docker
