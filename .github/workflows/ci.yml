@@ -183,6 +183,7 @@ jobs:
              echo "EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }}" >> .env
              echo "EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }}" >> .env
              echo "STRIPE_API_KEY=${{ secrets.STRIPE_API_KEY }}" >> .env
+             echo "SERVER_IP=${{ secrets.SERVER_IP }}" >> .env
             
         
             echo "Step 5: Installing venv dependency and creating virtual environment"
