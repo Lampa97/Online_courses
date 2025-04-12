@@ -147,6 +147,11 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://ec2-16-171-150-152.eu-north-1.compute.amazonaws.com",
+    "https://ec2-16-171-150-152.eu-north-1.compute.amazonaws.com",
+]
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
