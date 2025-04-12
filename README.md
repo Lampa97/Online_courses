@@ -40,7 +40,59 @@ This project is a Django API designed to manage online courses, lessons, and pay
 - 'EMAIL_PORT' - Email port for sending emails. **Default example:587**
 - 'EMAIL_USE_TLS' - Use TLS for email sending. **Default example: True**
 
-## Once you have set up the remote server and filled in the necessary secrets and variables, you can proceed with the deployment.
+## Once you have set up the remote server and filled in the necessary secrets and variables, you can proceed with the installation of necessary dependencies.
+
+1. **Connect to your server via SSH** (check your server provider's documentation for details):
+    ```sh
+    ssh <username>@<server_ip>
+    ```
+2. **Firewall setup**:
+   Run following commands to set up the firewall:
+    ```sh    
+   sudo ufw --force enable
+   sudo ufw allow 22/tcp
+   sudo ufw allow 80/tcp
+   sudo ufw allow 443/tcp
+   sudo ufw allow 5432/tcp
+   sudo ufw allow 6379/tcp
+   sudo ufw allow 8000/tcp
+   sudo ufw allow 587/tcp
+   ```
+3. **Install Docker and Docker Compose**:
+   Execute the following commands or follow the official Docker installation guide for your OS:
+   ```sh 
+   sudo apt-get update
+   sudo apt-get install ca-certificates curl
+   sudo install -m 0755 -d /etc/apt/keyrings
+   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+   sudo chmod a+r /etc/apt/keyrings/docker.asc
+   
+   echo \
+     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+     $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   sudo apt-get update -y
+   sudo apt-get upgrade -y
+   sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   sudo apt-get update
+   ```
+
+4. **Install Git**:
+   ```sh
+   sudo apt-get install -y git
+   sudo git --version
+   ```
+5. **Clone the repository and cd to project directory**:
+   ```sh
+    git clone <repository_url>
+    cd <repository_directory>
+    checkout <branch_name> # if necessary
+    ```
+6. **Create and configure the `.env` file**:
+   ```sh
+   cp .env.example .env
+   # Edit the .env file to set your environment variables using nano or vim
+   ```
 
 GitHub Actions will automatically build the Docker image, push it to Docker Hub, and deploy it to the remote server.
 You just have to proceed with push or pull request and if all set up correctly, the deployment will be done automatically.
