@@ -4,6 +4,52 @@
 
 This project is a Django API designed to manage online courses, lessons, and payments for users. It provides a structured way to create and manage educational content and track user payments. The project includes management commands to set up initial data, create test users, and generate payments for those users.
 
+# Instructions for deploy on the server
+
+## Prepare a remote server
+
+1. **Create a remote server**: You can use any cloud provider (e.g., AWS, DigitalOcean, etc.) to create a remote server.
+2. **Fill up info**:
+      - Create .env file inside the project directory and fill up it according to .env.sample
+      - Add necessary secrets and variables in the GitHub actions secrets section.
+
+### Here is the overview of necessary secrets inside GitHub actions:
+- 'DJANGO_SECRET_KEY' - Django secret key for the project.
+- 'DOCKER_USERNAME' - Docker Hub username.
+- 'DOCKER_PASSWORD' - Docker Hub password.
+- 'SERVER_IP' - IP address of the remote server.
+- 'SSH_KEY' - SSH key for accessing the remote server.
+- 'SSH_USER' - SSH user for accessing the remote server.
+- 'POSTGRES_USER' - PostgreSQL username.
+- 'POSTGRES_PASSWORD' - PostgreSQL password.
+#### Additional secrets:
+- 'EMAIL_HOST_USER' - Email host user for sending emails.
+- 'EMAIL_HOST_PASSWORD' - Email host password for sending emails.
+- 'STRIPE_API_KEY' - Stripe API key for payment processing.
+
+### Overview of necessary variables inside GitHub actions:
+- 'CELERY_BROKER_URL' - URL for the Celery broker (Redis). **Default example: redis://redis:6379/1**
+- 'CELERY_RESULT_BACKEND' - URL for the Celery result backend (Redis). **Default example: redis://redis:6379/1**
+- 'REDIS_HOST' - Redis host. **Default example: redis://redis:6379//**
+- 'DEBUG' - Debug mode for Django. **Default example: True**
+- 'POSTGRES_DB' - PostgreSQL database name. **First create database locally on your machine**
+- 'POSTGRES_HOST' - PostgreSQL host. **Default example: db - as specified inside docker-compose.yml (service: db)**
+- 'POSTGRES_PORT' - PostgreSQL port. **Default example: 5432**
+#### Additional variables:
+- 'EMAIL_HOST' - Email host for sending emails. **Default example: smtp.gmail.com**
+- 'EMAIL_PORT' - Email port for sending emails. **Default example:587**
+- 'EMAIL_USE_TLS' - Use TLS for email sending. **Default example: True**
+
+## Once you have set up the remote server and filled in the necessary secrets and variables, you can proceed with the deployment.
+
+GitHub Actions will automatically build the Docker image, push it to Docker Hub, and deploy it to the remote server.
+You just have to proceed with push or pull request
+
+
+```sh
+docker exec backend python3 manage.py createadmin
+```
+    
 # Project Setup Instructions
 
 First of all, make sure you have Docker and Docker Compose installed on your machine.
