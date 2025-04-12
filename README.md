@@ -43,14 +43,19 @@ This project is a Django API designed to manage online courses, lessons, and pay
 ## Once you have set up the remote server and filled in the necessary secrets and variables, you can proceed with the deployment.
 
 GitHub Actions will automatically build the Docker image, push it to Docker Hub, and deploy it to the remote server.
-You just have to proceed with push or pull request
+You just have to proceed with push or pull request and if all set up correctly, the deployment will be done automatically.
 
+If you want to create a new admin user, you can do it by running the following command on the remote server:
+#### Note: First cd to the project directory.
+#### Note: If you are facing permission issues, you can use sudo command.
 
 ```sh
 docker exec backend python3 manage.py createadmin
 ```
-    
-# Project Setup Instructions
+
+Now you can access to your remote server using the IP address. For more detailed information about project structure, please continue to follow the guide
+ 
+# Project Local Setup Instructions
 
 First of all, make sure you have Docker and Docker Compose installed on your machine.
 
