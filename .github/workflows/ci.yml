@@ -120,7 +120,7 @@ jobs:
             
             echo "Step 1: Pulling the latest code from the repository"
             cd Online_courses
-            git checkout homework_35_2
+            git checkout develop
             git pull
                     
             echo "Step 2: Creating static folder"
