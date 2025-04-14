@@ -90,7 +90,7 @@ This project is a Django API designed to manage online courses, lessons, and pay
     ```
 6. **Create and configure the `.env` file**:
    ```sh
-   cp .env.example .env
+   cp .env.sample .env
    # Edit the .env file to set your environment variables using nano or vim
    ```
 
